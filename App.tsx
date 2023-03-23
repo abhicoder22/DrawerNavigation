@@ -1,7 +1,7 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Article from './src/Article';
-import Feed from './src/Feed';
+import Profile from './src/Profile';
+import Toptab from './src/Toptab';
 import Customdrawer from './src/customdrawer';
 import {NavigationContainer} from '@react-navigation/native';
 import messages from './src/messages';
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Feed"
+        initialRouteName="Toptab"
         drawerContent={props => <Customdrawer {...props} />}
         screenOptions={{
           drawerActiveBackgroundColor: '#a83ea2',
@@ -24,8 +24,8 @@ const App = () => {
           },
         }}>
         <Drawer.Screen
-          name="Home"
-          component={Feed}
+          name="Toptab"
+          component={Toptab}
           options={{
             drawerIcon: ({color}) => (
               <Image
@@ -37,7 +37,7 @@ const App = () => {
         />
         <Drawer.Screen
           name="Profile"
-          component={Article}
+          component={Profile}
           options={{
             drawerIcon: ({color}) => (
               <Image
