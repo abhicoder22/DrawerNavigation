@@ -6,6 +6,7 @@ import Customdrawer from './src/customdrawer';
 import {NavigationContainer} from '@react-navigation/native';
 import messages from './src/messages';
 import {Image} from 'react-native';
+import Setting from './src/settings';
 const Drawer = createDrawerNavigator();
 
 const App = () => {
@@ -61,7 +62,7 @@ const App = () => {
         />
         <Drawer.Screen
           name="Settings"
-          component={messages}
+          component={Setting}
           options={{
             drawerIcon: ({color}) => (
               <Image
