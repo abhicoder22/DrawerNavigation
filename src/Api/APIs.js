@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {View, Text, Button, TouchableOpacity} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
 export default function APIs() {
