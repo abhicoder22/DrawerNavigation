@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {View, Text, Button} from 'react-native';
+import {View, Text, Button, SafeAreaView} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
 export default function APIs() {
@@ -19,24 +19,33 @@ export default function APIs() {
         APIs
       </Text>
       <Button title="Get data" onPress={getApi} />
-
-      <FlatList
-        data={data}
-        ListEmptyComponent={() => (
-          <Text style={{fontSize: 20, color: 'black', textAlign: 'center'}}>
-            no data
-          </Text>
-        )}
-        renderItem={({item}) => (
-          <View style={{paddingHorizontal: 20}}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{item.text}</Text>
-            <Text style={{fontSize: 15, fontWeight: 'bold'}}>
-              {item.author}
+      <SafeAreaView>
+        <FlatList
+          data={data}
+          ListEmptyComponent={() => (
+            <Text style={{fontSize: 20, color: 'black', textAlign: 'center'}}>
+              no data
             </Text>
-          </View>
-        )}
-        ItemSeparatorComponent={() => <View style={{height: 20}} />}
-      />
+          )}
+          renderItem={({item}) => (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'column',
+                margin: 5,
+              }}>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                {item.text}
+              </Text>
+              <Text style={{fontSize: 15, fontWeight: 'bold'}}>
+                {item.author}
+              </Text>
+            </View>
+          )}
+          numColumns={3}
+          // ItemSeparatorComponent={() => <View style={{height: 20}} />}
+        />
+      </SafeAreaView>
     </View>
   );
 }
