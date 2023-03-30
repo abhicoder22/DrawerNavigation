@@ -2,14 +2,16 @@ import {View, Text, Image, StyleSheet, Button, Alert} from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import useGallery from './Hooks/useGallery';
 
 const ProfilePage = () => {
-  const [imageUri, setImageUri] = useState([]);
+  const [cameraUri, setcameraUri] = useState('');
+  const [galleryUri, openGallery] = useGallery();
 
   const openCamera = () => {
-    let options = {
+    const options = {
       storageOption: {
-        path: 'images',
+        path: 'Photos',
         mediaType: 'photo',
       },
       includeBase64: true,
@@ -23,31 +25,7 @@ const ProfilePage = () => {
       } else if (response.customButton) {
         console.log('user tapped custom button: ', response.customButton);
       } else {
-        const source = {uri: 'data:image/jpeg;base64,' + response.base64};
-        setImageUri(source);
-      }
-    });
-  };
-
-  const openGallery = () => {
-    let options = {
-      storageOption: {
-        path: 'images',
-        mediaType: 'photo',
-      },
-      includeBase64: true,
-    };
-    launchImageLibrary(options, response => {
-      console.log('Response =', response);
-      if (response.didCancel) {
-        console.log('user cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker error: ', response.error);
-      } else if (response.customButton) {
-        console.log('user tapped custom button: ', response.customButton);
-      } else {
-        const source = {uri: 'data:image/jpeg;base64,' + response.base64};
-        setImageUri(source);
+        setcameraUri(response.assets[0].uri);
       }
     });
   };
@@ -69,7 +47,7 @@ const ProfilePage = () => {
           }}
         />
         <Image
-          source={{imageUri}}
+          source={{uri: cameraUri}}
           style={{
             height: 100,
             width: 100,
@@ -87,7 +65,7 @@ const ProfilePage = () => {
           }}
         />
         <Image
-          source={{imageUri}}
+          source={{uri: galleryUri}}
           style={{
             height: 100,
             width: 100,
